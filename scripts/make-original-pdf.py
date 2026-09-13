@@ -22,8 +22,11 @@ rows=[[p('용어',head),p('뜻',head)]]+[[p(t['term'],name),p(t['original'])] fo
 table=LongTable(rows,colWidths=[139,372.27],repeatRows=1,hAlign='LEFT')
 table.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,0),colors.HexColor('#243b60')),('ROWBACKGROUNDS',(0,1),(-1,-1),[colors.white,colors.HexColor('#f5f7fa')]),('GRID',(0,0),(-1,-1),.5,colors.HexColor('#d9d9d9')),('VALIGN',(0,0),(-1,-1),'TOP'),('LEFTPADDING',(0,0),(-1,-1),10),('RIGHTPADDING',(0,0),(-1,-1),10),('TOPPADDING',(0,0),(-1,-1),8),('BOTTOMPADDING',(0,0),(-1,-1),8)]))
 out=ROOT/'public/network-security-original.pdf'
-doc=SimpleDocTemplate(str(out),pagesize=A4,rightMargin=42,leftMargin=42,topMargin=42,bottomMargin=42,title='네트워크 보안 용어집',author='')
+doc=SimpleDocTemplate(str(out),pagesize=A4,rightMargin=42,leftMargin=42,topMargin=42,bottomMargin=42,title='네트워크 보안 용어집',author='Jenny Cha')
 def footer(canvas,doc):
+ canvas.saveState()
+ canvas.setFont('Malgun',9);canvas.setFillColor(colors.HexColor('#4b5563'));canvas.drawRightString(A4[0]-42,A4[1]-28,'By Jenny Cha')
  canvas.setFont('Malgun',8);canvas.setFillColor(colors.HexColor('#6b7280'));canvas.drawRightString(A4[0]-42,25,str(doc.page))
+ canvas.restoreState()
 doc.build([p('네트워크 보안 용어집',title),Spacer(1,18),table],onFirstPage=footer,onLaterPages=footer)
 print(f'Created {out.name} with {len(terms)} original definitions')
