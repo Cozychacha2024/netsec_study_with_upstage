@@ -132,3 +132,7 @@ h1,h2{word-break:keep-all;overflow-wrap:anywhere}.source-link{display:inline-fle
 .chat-panel .chat-header h2{font-family:"Jua","Malgun Gothic",sans-serif;font-size:25px;font-weight:400;letter-spacing:0;color:#284475;line-height:1.35}
 .chat-panel .chat-header p{font-size:12px;color:#6b7fa1;margin-top:5px;line-height:1.6;word-break:keep-all}
 @media(max-width:650px){.chat-panel .chat-header{padding:14px 13px;gap:12px;border-radius:17px}.chat-profile-frame{width:58px;height:58px;border-radius:19px}.chat-profile-frame .bot-avatar{width:55px;height:55px}.chat-panel .chat-header h2{font-size:23px}.chat-panel .chat-header p{font-size:11px}}
+
+.brand small{white-space:nowrap;font-size:9px;letter-spacing:.15px}.brand{gap:9px;padding-left:4px;padding-right:0}.brand>span:last-child{min-width:0}@media(max-width:1150px) and (min-width:901px){.brand small{font-size:8px;letter-spacing:0}.brand{gap:7px}.brand-icon{padding:7px}}@media(max-width:650px){.brand small{font-size:8px;letter-spacing:0}.brand{padding:0;gap:8px}}
+
+.chat-panel .chat-header{width:fit-content;max-width:100%;padding-right:24px}@media(max-width:650px){.chat-panel .chat-header{padding-right:17px}}
