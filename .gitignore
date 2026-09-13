@@ -46,3 +46,7 @@ next-env.d.ts
 /outputs/
 /work/
 *.tsbuildinfo
+
+# Local API secrets
+.env.local
+env.local

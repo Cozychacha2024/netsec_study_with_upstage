@@ -1,18 +1,452 @@
 [
-{"name":"프로토콜","category":"통신 규칙","definition":"장치들이 데이터를 주고받기 위해 합의한 규칙입니다. 메시지 형식, 전송 순서, 오류 처리 방법 등을 정합니다.","example":"편지를 보낼 때 주소와 우표의 위치를 지키는 것과 비슷합니다.","source":"RFC 1122","url":"https://www.rfc-editor.org/rfc/rfc1122"},
-{"name":"TCP","category":"전송 계층","definition":"연결을 맺고 바이트 스트림을 순서대로 전달하는 프로토콜입니다. 손실된 데이터를 재전송하고 흐름 및 혼잡을 제어합니다.","example":"파일 전송처럼 빠짐없는 전달이 필요한 통신에 사용합니다. 연결이 실패하면 응용 프로그램에 오류가 전달될 수 있습니다.","source":"RFC 9293","url":"https://www.rfc-editor.org/rfc/rfc9293"},
-{"name":"UDP","category":"전송 계층","definition":"연결 설정 없이 데이터그램을 보내는 프로토콜입니다. 프로토콜 자체는 도착, 순서, 재전송을 보장하지 않습니다.","example":"실시간 통신에서 쓰이며, 필요한 신뢰성은 응용 프로그램이나 상위 프로토콜이 추가할 수 있습니다.","source":"RFC 768","url":"https://www.rfc-editor.org/rfc/rfc768"},
-{"name":"HTTP / HTTPS","category":"웹 통신","definition":"HTTP는 웹 요청과 응답의 의미를 정의합니다. HTTPS는 TLS로 보호되는 HTTP 통신입니다.","example":"HTTPS는 통신을 암호화하고 서버 인증을 지원하지만, 사이트 내용의 신뢰성까지 보장하지는 않습니다.","source":"RFC 9110","url":"https://www.rfc-editor.org/rfc/rfc9110"},
-{"name":"TLS","category":"통신 보안","definition":"통신 내용을 암호화하고 무결성을 보호하며 인증을 지원하는 프로토콜입니다.","example":"브라우저와 서버 사이에서 도청과 변조 위험을 줄입니다. 인증서 검증도 중요합니다.","source":"RFC 8446","url":"https://www.rfc-editor.org/rfc/rfc8446"},
-{"name":"IPv4 / IPv6","category":"주소 체계","definition":"IPv4 주소는 32비트이고 IPv6 주소는 128비트입니다. IPv6는 더 넓은 주소 공간을 제공합니다.","example":"192.0.2.1은 IPv4 예시, 2001:db8::1은 IPv6 예시입니다. IPv6를 쓴다고 모든 통신이 자동으로 암호화되지는 않습니다.","source":"RFC 8200","url":"https://www.rfc-editor.org/rfc/rfc8200"},
-{"name":"ARP","category":"주소 해석","definition":"IPv4 환경에서 같은 링크의 IP 주소에 대응하는 링크 계층 주소를 알아내는 프로토콜입니다.","example":"다른 네트워크로 보낼 때는 보통 다음 홉 라우터의 MAC 주소를 알아냅니다.","source":"RFC 826","url":"https://www.rfc-editor.org/rfc/rfc826"},
-{"name":"ICMP","category":"제어 메시지","definition":"IP 통신의 오류 및 진단 정보를 전달하는 프로토콜입니다. IPv4와 IPv6에서 사용하는 ICMP 규격은 다릅니다.","example":"ping은 ICMP Echo 요청과 응답을 이용합니다. 응답이 없다고 반드시 장치가 꺼져 있는 것은 아닙니다.","source":"RFC 792","url":"https://www.rfc-editor.org/rfc/rfc792"},
-{"name":"NAT","category":"주소 변환","definition":"라우터 등이 패킷의 IP 주소를 변환하는 기술입니다. 포트까지 변환하면 여러 장치가 공인 IP 주소를 공유할 수 있습니다.","example":"NAT 자체를 방화벽이나 암호화와 같은 개념으로 생각하면 안 됩니다.","source":"RFC 3022","url":"https://www.rfc-editor.org/rfc/rfc3022"},
-{"name":"방화벽","category":"접근 제어","definition":"정해진 정책에 따라 네트워크 트래픽을 허용하거나 차단하는 보안 기능입니다.","example":"주소, 포트, 연결 상태 등 여러 기준으로 정책을 적용합니다. 허용된 통신을 통한 모든 공격까지 막아 주지는 않습니다.","source":"NIST SP 800-41 Rev.1","url":"https://csrc.nist.gov/pubs/sp/800/41/r1/final"},
-{"name":"암호화와 해시","category":"데이터 보호","definition":"암호화는 키로 데이터를 복원할 수 있게 변환합니다. 암호학적 해시는 입력을 일정 길이 값으로 변환하며 원래 입력을 역산하기 어렵도록 설계합니다.","example":"해시는 복호화하는 방식이 아닙니다. 무결성 확인이나 비밀번호 검증 등 목적에 맞는 알고리즘을 선택해야 합니다.","source":"RFC 4949","url":"https://www.rfc-editor.org/rfc/rfc4949"},
-{"name":"인증과 인가","category":"접근 제어","definition":"인증은 누구인지 확인하는 과정이고, 인가는 어떤 자원이나 기능에 접근할 수 있는지 판단하는 과정입니다.","example":"학생증 확인은 인증, 특정 실습실 입장 권한 확인은 인가에 비유할 수 있습니다.","source":"RFC 4949","url":"https://www.rfc-editor.org/rfc/rfc4949"},
-{"name":"기밀성 · 무결성 · 가용성","category":"보안의 기본","definition":"기밀성은 허용된 사람만 정보를 보게 하고, 무결성은 무단 변경을 막거나 탐지하며, 가용성은 필요할 때 서비스를 이용하게 합니다.","example":"암호화, 변조 탐지, 장애 대비가 각각 어떤 목표에 기여하는지 생각해 보세요.","source":"NIST FIPS 199","url":"https://csrc.nist.gov/pubs/fips/199/final"},
-{"name":"캡슐화","category":"계층 구조","definition":"상위 계층 데이터를 하위 계층이 전달할 때 제어 정보인 헤더 등을 덧붙이는 과정입니다.","example":"TCP를 사용할 때 응용 데이터 → TCP 세그먼트 → IP 패킷 → 이더넷 프레임 순으로 생각해 보세요.","source":"RFC 1122","url":"https://www.rfc-editor.org/rfc/rfc1122"},
-{"name":"SSH","category":"원격 접속","definition":"보호되지 않은 네트워크에서 안전한 원격 로그인과 여러 네트워크 서비스를 제공하는 프로토콜입니다.","example":"서버를 원격으로 관리할 때 사용합니다. 서버의 호스트 키를 확인해 의도한 서버인지 검증해야 합니다.","source":"RFC 4251","url":"https://www.rfc-editor.org/rfc/rfc4251"},
-{"name":"IPsec","category":"네트워크 보안","definition":"IP 계층에서 통신을 보호하는 프로토콜 집합입니다. 선택한 구성에 따라 인증, 무결성, 기밀성 등의 보안 서비스를 제공합니다.","example":"VPN 구축에 사용될 수 있습니다. 터널 모드와 전송 모드는 보호하는 패킷의 범위가 다릅니다.","source":"RFC 4301","url":"https://www.rfc-editor.org/rfc/rfc4301"}
+  {
+    "name": "프로토콜",
+    "category": "통신 규칙",
+    "definition": "장치들이 데이터를 주고받기 위해 합의한 규칙입니다. 메시지 형식, 전송 순서, 오류 처리 방법 등을 정합니다.",
+    "example": "편지를 보낼 때 주소와 우표의 위치를 지키는 것과 비슷합니다.",
+    "source": "RFC 1122",
+    "url": "https://www.rfc-editor.org/rfc/rfc1122",
+    "related": ""
+  },
+  {
+    "name": "TCP",
+    "category": "전송 계층",
+    "definition": "연결을 맺고 바이트 스트림을 순서대로 전달하는 프로토콜입니다. 손실된 데이터를 재전송하고 흐름 및 혼잡을 제어합니다.",
+    "example": "파일 전송처럼 빠짐없는 전달이 필요한 통신에 사용합니다. 연결이 실패하면 응용 프로그램에 오류가 전달될 수 있습니다.",
+    "source": "RFC 9293",
+    "url": "https://www.rfc-editor.org/rfc/rfc9293",
+    "related": ""
+  },
+  {
+    "name": "UDP",
+    "category": "전송 계층",
+    "definition": "연결 설정 없이 데이터그램을 보내는 프로토콜입니다. 프로토콜 자체는 도착, 순서, 재전송을 보장하지 않습니다.",
+    "example": "실시간 통신에서 쓰이며, 필요한 신뢰성은 응용 프로그램이나 상위 프로토콜이 추가할 수 있습니다.",
+    "source": "RFC 768",
+    "url": "https://www.rfc-editor.org/rfc/rfc768",
+    "related": ""
+  },
+  {
+    "name": "HTTP / HTTPS",
+    "category": "웹 통신",
+    "definition": "HTTP는 웹 요청과 응답의 의미를 정의합니다. HTTPS는 TLS로 보호되는 HTTP 통신입니다.",
+    "example": "HTTPS는 통신을 암호화하고 서버 인증을 지원하지만, 사이트 내용의 신뢰성까지 보장하지는 않습니다.",
+    "source": "RFC 9110",
+    "url": "https://www.rfc-editor.org/rfc/rfc9110",
+    "related": ""
+  },
+  {
+    "name": "TLS",
+    "category": "통신 보안",
+    "definition": "통신 내용을 암호화하고 무결성을 보호하며 인증을 지원하는 프로토콜입니다.",
+    "example": "브라우저와 서버 사이에서 도청과 변조 위험을 줄입니다. 인증서 검증도 중요합니다.",
+    "source": "RFC 8446",
+    "url": "https://www.rfc-editor.org/rfc/rfc8446",
+    "related": ""
+  },
+  {
+    "name": "IPv4 / IPv6",
+    "category": "주소 체계",
+    "definition": "IPv4 주소는 32비트이고 IPv6 주소는 128비트입니다. IPv6는 더 넓은 주소 공간을 제공합니다.",
+    "example": "192.0.2.1은 IPv4 예시, 2001:db8::1은 IPv6 예시입니다. IPv6를 쓴다고 모든 통신이 자동으로 암호화되지는 않습니다.",
+    "source": "RFC 8200",
+    "url": "https://www.rfc-editor.org/rfc/rfc8200",
+    "related": ""
+  },
+  {
+    "name": "ARP",
+    "category": "주소 해석",
+    "definition": "IPv4 환경에서 같은 링크의 IP 주소에 대응하는 링크 계층 주소를 알아내는 프로토콜입니다.",
+    "example": "다른 네트워크로 보낼 때는 보통 다음 홉 라우터의 MAC 주소를 알아냅니다.",
+    "source": "RFC 826",
+    "url": "https://www.rfc-editor.org/rfc/rfc826",
+    "related": ""
+  },
+  {
+    "name": "ICMP",
+    "category": "제어 메시지",
+    "definition": "IP 통신의 오류 및 진단 정보를 전달하는 프로토콜입니다. IPv4와 IPv6에서 사용하는 ICMP 규격은 다릅니다.",
+    "example": "ping은 ICMP Echo 요청과 응답을 이용합니다. 응답이 없다고 반드시 장치가 꺼져 있는 것은 아닙니다.",
+    "source": "RFC 792",
+    "url": "https://www.rfc-editor.org/rfc/rfc792",
+    "related": ""
+  },
+  {
+    "name": "NAT",
+    "category": "주소 변환",
+    "definition": "라우터 등이 패킷의 IP 주소를 변환하는 기술입니다. 포트까지 변환하면 여러 장치가 공인 IP 주소를 공유할 수 있습니다.",
+    "example": "NAT 자체를 방화벽이나 암호화와 같은 개념으로 생각하면 안 됩니다.",
+    "source": "RFC 3022",
+    "url": "https://www.rfc-editor.org/rfc/rfc3022",
+    "related": ""
+  },
+  {
+    "name": "방화벽",
+    "category": "접근 제어",
+    "definition": "정해진 정책에 따라 네트워크 트래픽을 허용하거나 차단하는 보안 기능입니다.",
+    "example": "주소, 포트, 연결 상태 등 여러 기준으로 정책을 적용합니다. 허용된 통신을 통한 모든 공격까지 막아 주지는 않습니다.",
+    "source": "NIST SP 800-41 Rev.1",
+    "url": "https://csrc.nist.gov/pubs/sp/800/41/r1/final",
+    "related": ""
+  },
+  {
+    "name": "암호화와 해시",
+    "category": "데이터 보호",
+    "definition": "암호화는 키로 데이터를 복원할 수 있게 변환합니다. 암호학적 해시는 입력을 일정 길이 값으로 변환하며 원래 입력을 역산하기 어렵도록 설계합니다.",
+    "example": "해시는 복호화하는 방식이 아닙니다. 무결성 확인이나 비밀번호 검증 등 목적에 맞는 알고리즘을 선택해야 합니다.",
+    "source": "RFC 4949",
+    "url": "https://www.rfc-editor.org/rfc/rfc4949",
+    "related": ""
+  },
+  {
+    "name": "인증과 인가",
+    "category": "접근 제어",
+    "definition": "인증은 누구인지 확인하는 과정이고, 인가는 어떤 자원이나 기능에 접근할 수 있는지 판단하는 과정입니다.",
+    "example": "학생증 확인은 인증, 특정 실습실 입장 권한 확인은 인가에 비유할 수 있습니다.",
+    "source": "RFC 4949",
+    "url": "https://www.rfc-editor.org/rfc/rfc4949",
+    "related": ""
+  },
+  {
+    "name": "기밀성 · 무결성 · 가용성",
+    "category": "보안의 기본",
+    "definition": "기밀성은 허용된 사람만 정보를 보게 하고, 무결성은 무단 변경을 막거나 탐지하며, 가용성은 필요할 때 서비스를 이용하게 합니다.",
+    "example": "암호화, 변조 탐지, 장애 대비가 각각 어떤 목표에 기여하는지 생각해 보세요.",
+    "source": "NIST FIPS 199",
+    "url": "https://csrc.nist.gov/pubs/fips/199/final",
+    "related": ""
+  },
+  {
+    "name": "캡슐화",
+    "category": "계층 구조",
+    "definition": "상위 계층 데이터를 하위 계층이 전달할 때 제어 정보인 헤더 등을 덧붙이는 과정입니다.",
+    "example": "TCP를 사용할 때 응용 데이터 → TCP 세그먼트 → IP 패킷 → 이더넷 프레임 순으로 생각해 보세요.",
+    "source": "RFC 1122",
+    "url": "https://www.rfc-editor.org/rfc/rfc1122",
+    "related": ""
+  },
+  {
+    "name": "SSH",
+    "category": "원격 접속",
+    "definition": "보호되지 않은 네트워크에서 안전한 원격 로그인과 여러 네트워크 서비스를 제공하는 프로토콜입니다.",
+    "example": "서버를 원격으로 관리할 때 사용합니다. 서버의 호스트 키를 확인해 의도한 서버인지 검증해야 합니다.",
+    "source": "RFC 4251",
+    "url": "https://www.rfc-editor.org/rfc/rfc4251",
+    "related": ""
+  },
+  {
+    "name": "IPsec",
+    "category": "네트워크 보안",
+    "definition": "IP 계층에서 통신을 보호하는 프로토콜 집합입니다. 선택한 구성에 따라 인증, 무결성, 기밀성 등의 보안 서비스를 제공합니다.",
+    "example": "VPN 구축에 사용될 수 있습니다. 터널 모드와 전송 모드는 보호하는 패킷의 범위가 다릅니다.",
+    "source": "RFC 4301",
+    "url": "https://www.rfc-editor.org/rfc/rfc4301",
+    "related": ""
+  },
+  {
+    "name": "비트와 바이트",
+    "category": "데이터 단위",
+    "definition": "비트(bit)는 0 또는 1을 나타내는 단위입니다. 바이트(byte)는 일반적으로 8비트이며, 네트워크 규격에서는 8비트를 명확히 가리키는 옥텟(octet)이라는 표현도 씁니다.",
+    "example": "IPv4 주소 32비트는 4바이트입니다. 전송 속도의 Mbps와 파일 크기의 MB는 단위가 다릅니다.",
+    "related": "1. 네트워크 프리픽스 · 21. 포트 번호",
+    "source": "RFC 791",
+    "url": "https://www.rfc-editor.org/rfc/rfc791"
+  },
+  {
+    "name": "비트 AND 연산",
+    "category": "주소 계산",
+    "definition": "같은 위치의 두 비트가 모두 1일 때만 결과가 1이 되는 연산입니다. IPv4 주소와 서브넷 마스크를 비트 단위로 AND 하면 네트워크 주소를 구할 수 있습니다.",
+    "example": "192.168.1.42와 255.255.255.0을 AND 하면 192.168.1.0이 됩니다.",
+    "related": "2. 넷마스크",
+    "source": "RFC 950",
+    "url": "https://www.rfc-editor.org/rfc/rfc950"
+  },
+  {
+    "name": "서브넷",
+    "category": "주소 체계",
+    "definition": "하나의 IP 네트워크를 더 작은 논리적 네트워크로 나눈 단위입니다. 프리픽스 길이로 네트워크 부분과 호스트 부분의 경계를 표현합니다.",
+    "example": "192.168.1.0/24를 /26으로 나누면 주소 64개씩인 네 개의 블록이 됩니다. 사용 가능한 호스트 수와 전체 주소 수는 구분해야 합니다.",
+    "related": "1. 네트워크 프리픽스 · 6. CIDR",
+    "source": "RFC 4632",
+    "url": "https://www.rfc-editor.org/rfc/rfc4632"
+  },
+  {
+    "name": "기본 게이트웨이",
+    "category": "경로 선택",
+    "definition": "더 구체적으로 일치하는 경로가 없을 때 패킷을 넘기는 기본 경로의 다음 홉 라우터입니다. 다른 네트워크로 나갈 때 자주 이용합니다.",
+    "example": "같은 서브넷의 기기와 통신할 때는 보통 기본 게이트웨이를 거치지 않고 직접 전달합니다.",
+    "related": "10. 구성 프로토콜",
+    "source": "RFC 1122",
+    "url": "https://www.rfc-editor.org/rfc/rfc1122"
+  },
+  {
+    "name": "라우팅 테이블",
+    "category": "경로 선택",
+    "definition": "목적지 네트워크에 따라 다음 홉과 송신 인터페이스 등을 선택하기 위한 경로 정보의 모음입니다. 호스트와 라우터 모두 가질 수 있습니다.",
+    "example": "일반적인 목적지 기반 조회에서는 일치하는 경로 중 프리픽스가 가장 긴 경로를 우선합니다.",
+    "related": "16. 라우터 · 30. ip route",
+    "source": "RFC 1812",
+    "url": "https://www.rfc-editor.org/rfc/rfc1812"
+  },
+  {
+    "name": "홉과 다음 홉",
+    "category": "경로 선택",
+    "definition": "홉은 패킷이 네트워크 경로에서 거치는 한 단계입니다. 다음 홉은 현재 장치가 패킷을 바로 넘겨줄 인접한 장치나 라우터를 말합니다.",
+    "example": "최종 목적지가 멀리 있어도 현재 라우터는 우선 다음 홉으로 전달합니다. 다음 홉과 최종 목적지는 다를 수 있습니다.",
+    "related": "16. 라우터 · 26. 라우팅",
+    "source": "RFC 1812",
+    "url": "https://www.rfc-editor.org/rfc/rfc1812"
+  },
+  {
+    "name": "멀티캐스트",
+    "category": "전송 방식",
+    "definition": "특정 멀티캐스트 그룹에 속한 수신자들에게 데이터를 전달하는 방식입니다. 하나의 수신자에게 보내는 유니캐스트와 구분합니다.",
+    "example": "그룹 통신에 쓰이며 네트워크의 멀티캐스트 지원과 그룹 가입 상태에 따라 전달 범위가 달라집니다.",
+    "related": "4. 유니캐스트",
+    "source": "RFC 1112",
+    "url": "https://www.rfc-editor.org/rfc/rfc1112"
+  },
+  {
+    "name": "브로드캐스트",
+    "category": "전송 방식",
+    "definition": "정해진 브로드캐스트 영역의 모든 장치를 대상으로 전송하는 방식입니다. 인터넷 전체에 보내는 뜻은 아닙니다.",
+    "example": "이더넷의 브로드캐스트 MAC 주소는 FF:FF:FF:FF:FF:FF입니다. IPv6는 브로드캐스트 대신 멀티캐스트 등을 이용합니다.",
+    "related": "4. 유니캐스트",
+    "source": "RFC 919",
+    "url": "https://www.rfc-editor.org/rfc/rfc919"
+  },
+  {
+    "name": "헤더",
+    "category": "패킷 구조",
+    "definition": "데이터를 해석하고 전달하는 데 필요한 제어 정보를 담은 부분입니다. 계층과 프로토콜에 따라 주소, 포트, 길이, 순서 번호 등 포함되는 필드가 다릅니다.",
+    "example": "IP 헤더는 IP 주소를, TCP 헤더는 포트와 순서 번호 등을 담습니다. 실제 데이터와 제어 정보를 구분해 보세요.",
+    "related": "15. 패킷 · 19. 페이로드",
+    "source": "RFC 791",
+    "url": "https://www.rfc-editor.org/rfc/rfc791"
+  },
+  {
+    "name": "프레임",
+    "category": "패킷 구조",
+    "definition": "데이터 링크 계층에서 전달하는 데이터 단위입니다. 이더넷 프레임에는 MAC 주소 등의 헤더, 담아 보내는 데이터, 오류 검사용 정보가 포함됩니다.",
+    "example": "IP 패킷은 이더넷 프레임 안에 실릴 수 있습니다. 프레임과 IP 패킷은 서로 다른 계층의 단위입니다.",
+    "related": "23. 데이터 링크 계층",
+    "source": "IEEE 802.3",
+    "url": "https://www.ieee802.org/3/"
+  },
+  {
+    "name": "OSI 7계층 모델",
+    "category": "계층 구조",
+    "definition": "통신 기능을 물리, 데이터 링크, 네트워크, 전송, 세션, 표현, 응용의 일곱 계층으로 나누어 이해하는 참조 모델입니다.",
+    "example": "실제 인터넷 프로토콜이 모든 계층에 정확히 하나씩 대응하는 것은 아닙니다. 각 기능이 맡는 역할을 구분하는 데 활용하세요.",
+    "related": "22~25. 네트워크·링크·물리·전송 계층",
+    "source": "ITU-T X.200",
+    "url": "https://www.itu.int/rec/T-REC-X.200-199407-I/en"
+  },
+  {
+    "name": "TCP/IP 계층 모델",
+    "category": "계층 구조",
+    "definition": "인터넷 통신을 링크, 인터넷, 전송, 응용 계층으로 설명하는 모델입니다. 교재에 따라 링크를 물리와 데이터 링크로 나누어 5계층으로 설명하기도 합니다.",
+    "example": "HTTP는 응용, TCP는 전송, IP는 인터넷, 이더넷은 링크 계층에 대응시켜 생각할 수 있습니다.",
+    "related": "22. 네트워크 계층 · 25. 전송계층",
+    "source": "RFC 1122",
+    "url": "https://www.rfc-editor.org/rfc/rfc1122"
+  },
+  {
+    "name": "3-way handshake",
+    "category": "TCP 동작",
+    "definition": "TCP 연결을 시작할 때 양쪽이 초기 순서 번호 등을 교환하고 서로 송수신할 수 있음을 확인하는 절차입니다. 일반적인 순서는 SYN, SYN+ACK, ACK입니다.",
+    "example": "연결을 준비하는 절차이지 데이터를 암호화하는 절차는 아닙니다.",
+    "related": "29. UDP 서버",
+    "source": "RFC 9293",
+    "url": "https://www.rfc-editor.org/rfc/rfc9293"
+  },
+  {
+    "name": "재전송",
+    "category": "TCP 동작",
+    "definition": "손실되었다고 판단한 데이터를 다시 보내는 동작입니다. TCP는 확인 응답과 타이머 등을 사용해 재전송 필요성을 판단합니다.",
+    "example": "UDP 자체에는 자동 재전송 기능이 없지만 UDP를 사용하는 응용 프로그램이 직접 구현할 수 있습니다.",
+    "related": "29. UDP 서버",
+    "source": "RFC 9293",
+    "url": "https://www.rfc-editor.org/rfc/rfc9293"
+  },
+  {
+    "name": "흐름 제어",
+    "category": "TCP 동작",
+    "definition": "송신자가 수신자의 처리 능력과 버퍼 용량을 넘어서 보내지 않도록 전송량을 조절하는 기능입니다. TCP에서는 수신 윈도 정보를 활용합니다.",
+    "example": "받는 쪽의 공간 부족을 다루는 것이 흐름 제어, 네트워크의 혼잡을 다루는 것이 혼잡 제어입니다.",
+    "related": "29. UDP 서버",
+    "source": "RFC 9293",
+    "url": "https://www.rfc-editor.org/rfc/rfc9293"
+  },
+  {
+    "name": "혼잡 제어",
+    "category": "TCP 동작",
+    "definition": "네트워크에 지나치게 많은 데이터가 유입되어 손실이나 지연이 커지는 상황을 줄이기 위해 송신 속도를 조절하는 기능입니다.",
+    "example": "TCP의 슬로 스타트는 혼잡 제어 기법 중 하나입니다. 수신자의 버퍼만 보는 흐름 제어와 구분하세요.",
+    "related": "29. UDP 서버",
+    "source": "RFC 5681",
+    "url": "https://www.rfc-editor.org/rfc/rfc5681"
+  },
+  {
+    "name": "DNS 레코드",
+    "category": "이름 해석",
+    "definition": "DNS에 저장되는 개별 정보 항목입니다. A는 IPv4 주소, AAAA는 IPv6 주소, MX는 메일 서버, NS는 해당 영역의 권한 있는 이름 서버를 나타냅니다.",
+    "example": "dig로 조회할 때 레코드 유형에 따라 받는 정보가 달라집니다. DNS가 저장하는 정보는 IP 주소만이 아닙니다.",
+    "related": "13. dig",
+    "source": "RFC 1035 · RFC 3596",
+    "url": "https://www.rfc-editor.org/rfc/rfc1035"
+  },
+  {
+    "name": "DNS 캐시와 TTL",
+    "category": "이름 해석",
+    "definition": "DNS 캐시는 이전 조회 결과를 잠시 보관해 반복 조회를 줄이는 기능입니다. 레코드의 TTL은 캐시에 저장할 수 있는 시간의 기준을 초 단위로 제공합니다.",
+    "example": "DNS 정보를 바꿔도 기존 캐시가 만료되기 전에는 이전 결과가 보일 수 있습니다. DNS TTL과 IP 헤더의 TTL은 역할이 다릅니다.",
+    "related": "11. DNS · 13. dig",
+    "source": "RFC 1034",
+    "url": "https://www.rfc-editor.org/rfc/rfc1034"
+  },
+  {
+    "name": "RFC",
+    "category": "인터넷 표준",
+    "definition": "인터넷 기술의 규격, 지침, 실험 결과 등을 기록하는 문서 시리즈입니다. 문서마다 고유한 RFC 번호가 있으며 모든 RFC가 인터넷 표준인 것은 아닙니다.",
+    "example": "규격을 읽을 때 표준인지 정보 제공용인지, 다른 RFC로 대체되거나 갱신되었는지도 확인하세요.",
+    "related": "7. IETF",
+    "source": "RFC Editor",
+    "url": "https://www.rfc-editor.org/"
+  },
+  {
+    "name": "OSPF",
+    "category": "라우팅 프로토콜",
+    "definition": "하나의 자율 시스템 내부에서 사용하는 링크 상태 기반 라우팅 프로토콜입니다. 링크 상태 정보를 교환하고 비용을 바탕으로 경로를 계산합니다.",
+    "example": "경로의 비용이 기준이므로 항상 지리적 거리가 가장 짧은 길을 고른다는 뜻은 아닙니다.",
+    "related": "26. 라우팅",
+    "source": "RFC 2328",
+    "url": "https://www.rfc-editor.org/rfc/rfc2328"
+  },
+  {
+    "name": "BGP",
+    "category": "라우팅 프로토콜",
+    "definition": "자율 시스템 사이에서 경로 정보를 교환하는 데 쓰이는 라우팅 프로토콜입니다. 경로 속성과 운영 정책이 경로 선택에 영향을 줍니다.",
+    "example": "인터넷 사업자들이 서로 도달 가능한 주소 대역을 알릴 때 사용합니다. 단순히 가장 빠른 경로를 측정하는 프로토콜은 아닙니다.",
+    "related": "26. 라우팅",
+    "source": "RFC 4271",
+    "url": "https://www.rfc-editor.org/rfc/rfc4271"
+  },
+  {
+    "name": "libpcap",
+    "category": "패킷 분석",
+    "definition": "여러 운영체제에서 패킷 캡처 기능을 사용할 수 있도록 제공하는 라이브러리입니다. tcpdump 같은 도구가 이를 이용합니다.",
+    "example": "패킷을 보여주는 완성된 GUI 프로그램이 아니라 프로그램이 캡처 기능을 호출할 때 쓰는 기반 라이브러리입니다.",
+    "related": "32. Wireshark · 45. tcpdump",
+    "source": "libpcap 프로젝트",
+    "url": "https://github.com/the-tcpdump-group/libpcap"
+  },
+  {
+    "name": "pcap 파일",
+    "category": "패킷 분석",
+    "definition": "캡처한 패킷과 타임스탬프 등을 저장하는 파일 형식입니다. 저장해 둔 트래픽을 나중에 분석하거나 다른 도구에서 열 때 사용합니다.",
+    "example": "tcpdump의 -w 옵션으로 저장한 파일을 Wireshark에서 열어 볼 수 있습니다. pcapng는 별도의 확장된 캡처 형식입니다.",
+    "related": "45. tcpdump",
+    "source": "Wireshark 사용자 가이드",
+    "url": "https://www.wireshark.org/docs/wsug_html_chunked/ChapterIO.html"
+  },
+  {
+    "name": "캡처 필터와 표시 필터",
+    "category": "패킷 분석",
+    "definition": "캡처 필터는 어떤 패킷을 수집할지 결정하고, 표시 필터는 이미 수집한 패킷 중 화면에 무엇을 보여줄지 정합니다. 두 필터의 문법도 다릅니다.",
+    "example": "Wireshark에서 캡처 필터는 tcp port 443, 표시 필터는 tcp.port == 443처럼 쓸 수 있습니다. 표시 필터로 숨겨도 캡처 파일에서 삭제되지는 않습니다.",
+    "related": "32. Wireshark · 46. BPF",
+    "source": "Wireshark 필터 가이드",
+    "url": "https://www.wireshark.org/docs/wsug_html_chunked/ChapterWork.html"
+  },
+  {
+    "name": "Scapy",
+    "category": "패킷 도구",
+    "definition": "Python에서 패킷을 구성하고 보내거나 캡처하고 분석할 수 있는 라이브러리이자 대화형 도구입니다. 프로토콜 필드를 직접 다루는 실습에 사용합니다.",
+    "example": "패킷 도착 시 실행할 함수를 지정하는 방식으로 콜백 개념과 연결해 공부할 수 있습니다.",
+    "related": "42. Callback handler",
+    "source": "Scapy 공식 문서",
+    "url": "https://scapy.readthedocs.io/en/latest/introduction.html"
+  },
+  {
+    "name": "eBPF",
+    "category": "커널 기술",
+    "definition": "검증된 프로그램을 커널의 특정 지점 등에 연결해 실행할 수 있는 기술입니다. 네트워크 처리뿐 아니라 관측, 성능 분석, 보안 용도로도 사용합니다.",
+    "example": "기존 패킷 필터에서 발전했지만 모든 eBPF 프로그램이 패킷만 처리하는 것은 아닙니다.",
+    "related": "46. BPF",
+    "source": "Linux BPF 문서",
+    "url": "https://docs.kernel.org/bpf/"
+  },
+  {
+    "name": "네임스페이스",
+    "category": "컨테이너 기반",
+    "definition": "프로세스가 바라보는 시스템 자원의 범위를 분리하는 Linux 기능입니다. 네트워크 네임스페이스는 인터페이스, 라우팅 테이블 등 네트워크 환경을 분리합니다.",
+    "example": "같은 호스트에서 실행돼도 컨테이너별로 다른 네트워크 환경을 볼 수 있습니다. 격리 범위는 사용하는 네임스페이스에 따라 다릅니다.",
+    "related": "38. 컨테이너 · 39. host 모드",
+    "source": "Docker 보안 문서",
+    "url": "https://docs.docker.com/engine/security/"
+  },
+  {
+    "name": "cgroups",
+    "category": "컨테이너 기반",
+    "definition": "프로세스를 그룹으로 묶어 CPU, 메모리 등의 자원 사용량을 관리하고 제한하는 Linux 기능입니다.",
+    "example": "네임스페이스가 무엇을 볼 수 있는지 분리한다면 cgroups는 자원을 얼마나 사용할 수 있는지 관리하는 데 활용됩니다.",
+    "related": "38. 컨테이너 · 49. 도커",
+    "source": "Linux cgroup v2 문서",
+    "url": "https://docs.kernel.org/admin-guide/cgroup-v2.html"
+  },
+  {
+    "name": "veth 페어",
+    "category": "가상 네트워크",
+    "definition": "서로 연결된 두 가상 이더넷 인터페이스입니다. 한쪽으로 보낸 데이터가 다른 쪽에서 수신되는 구조로 네임스페이스 사이를 연결할 때 쓰입니다.",
+    "example": "한쪽을 컨테이너 안에, 다른 쪽을 호스트의 브리지에 연결해 가상의 케이블처럼 사용할 수 있습니다.",
+    "related": "44. 가상 네트워크 인터페이스",
+    "source": "Linux veth 매뉴얼",
+    "url": "https://man7.org/linux/man-pages/man4/veth.4.html"
+  },
+  {
+    "name": "가상머신과 하이퍼바이저",
+    "category": "가상화",
+    "definition": "가상머신은 가상의 하드웨어 환경에서 게스트 운영체제를 실행합니다. 하이퍼바이저는 가상머신의 실행과 하드웨어 자원 배분을 관리합니다.",
+    "example": "일반적인 컨테이너는 호스트 커널을 공유하지만 가상머신은 별도의 게스트 커널을 실행합니다.",
+    "related": "38. 컨테이너 · 50. SEED 가상머신",
+    "source": "Docker 컨테이너 개념",
+    "url": "https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-a-container/"
+  },
+  {
+    "name": "컨테이너 이미지",
+    "category": "컨테이너 기반",
+    "definition": "컨테이너 실행에 필요한 파일, 라이브러리, 설정 등을 묶은 읽기 전용 템플릿입니다. 이미지로부터 실행 중인 컨테이너를 만들 수 있습니다.",
+    "example": "이미지는 실행 준비물, 컨테이너는 그 준비물로 만들어 실행하는 인스턴스라고 생각하면 쉽습니다.",
+    "related": "49. 도커 · 53. 서비스 영역",
+    "source": "Docker 이미지 문서",
+    "url": "https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-an-image/"
+  },
+  {
+    "name": "볼륨",
+    "category": "컨테이너 저장소",
+    "definition": "Docker가 관리하는 영속 데이터 저장 공간입니다. 컨테이너의 쓰기 계층과 분리해 데이터를 보관할 수 있습니다.",
+    "example": "컨테이너를 지워도 볼륨은 별도 삭제 전까지 남길 수 있습니다. 볼륨도 삭제 명령이나 정책에 따라 지워질 수 있습니다.",
+    "related": "51. Docker Compose",
+    "source": "Docker 볼륨 문서",
+    "url": "https://docs.docker.com/engine/storage/volumes/"
+  },
+  {
+    "name": "YAML",
+    "category": "설정 파일",
+    "definition": "들여쓰기로 구조를 표현하는 데이터 직렬화 형식입니다. 키와 값, 목록 등을 읽기 쉽게 작성할 수 있어 설정 파일에 자주 사용합니다.",
+    "example": "Compose 파일에서 services: 아래 들여쓰기된 항목은 서비스 설정에 속합니다. 구조를 나타내는 들여쓰기에는 탭 대신 공백을 사용합니다.",
+    "related": "48. Compose · 51. Docker Compose",
+    "source": "YAML 1.2.2 규격",
+    "url": "https://yaml.org/spec/1.2.2/"
+  },
+  {
+    "name": "DDoS",
+    "category": "보안 공격",
+    "definition": "여러 출처가 동시에 서비스의 회선, 처리 능력 등 자원을 소모시켜 정상 이용을 어렵게 만드는 분산 서비스 거부 공격입니다.",
+    "example": "스푸핑은 일부 반사·증폭 공격에서 이용되지만 모든 DDoS 공격에 반드시 필요한 것은 아닙니다.",
+    "related": "35. 패킷 스푸핑",
+    "source": "CISA DDoS 가이드",
+    "url": "https://www.cisa.gov/resources-tools/resources/understanding-and-responding-distributed-denial-service-attacks"
+  }
 ]
