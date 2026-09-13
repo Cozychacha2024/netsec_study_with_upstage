@@ -118,3 +118,5 @@ h1,h2{word-break:keep-all;overflow-wrap:anywhere}.source-link{display:inline-fle
  .topbar .export-button{white-space:nowrap;flex-shrink:0;font-size:11px}
  .term-card .definition p,.question .quiz-definition h2{font-size:14px;line-height:1.85}
 }
+
+.message-author{display:flex;align-items:center;gap:8px;min-height:32px}.message-avatar{width:32px;height:32px;object-fit:contain;border-radius:11px;background:#edf2fc;border:1px solid #e0e8f6;padding:2px}.message.user .message-author{justify-content:flex-end}.thinking-cat{width:84px;height:92px}.thinking-cat img{width:84px;height:84px}.thinking-cat .cat-shadow{left:25px}
