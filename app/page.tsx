@@ -4,13 +4,14 @@ import {flushSync} from "react-dom";
 import { ShieldCheck, BookOpen, Star, Gamepad2, MessageCircle, Library, Download, ChevronLeft, ChevronRight, Plus, Search, ArrowUpRight, Check, X } from "lucide-react";
 import initialTerms from "./terms.json";
 import Activities from "./activities";
+import {restoreSaved} from "./saved-terms";
 import AdminAdd from "./admin-add";
 export type Term = {id:number;term:string;original:string;supplement:string};
 const tabs = [{id:"review",label:"용어 학습",icon:BookOpen},{id:"stars",label:"별표 용어",icon:Star},{id:"game",label:"암기 게임",icon:Gamepad2},{id:"chat",label:"보안 냥이에게 물어보기",icon:MessageCircle},{id:"basics",label:"기초 개념 사전",icon:Library}];
 export default function Home(){
  const [terms,setTerms]=useState<Term[]>(initialTerms); const [stars,setStars]=useState<number[]>([]); const [seen,setSeen]=useState<number[]>([]); const [tab,setTab]=useState("review");const [index,setIndex]=useState(0);const [query,setQuery]=useState("");const [ready,setReady]=useState(false);const [adding,setAdding]=useState(false); const [notice,setNotice]=useState("");
- useEffect(()=>{try{const saved=JSON.parse(localStorage.getItem("security-notebook-v1")||"null");if(saved){setTerms([...initialTerms,...(saved.added||[]).filter((t:Term)=>t.id>53&&typeof t.term==="string"&&typeof t.original==="string")]);setStars(saved.stars||[]);setSeen(saved.seen||[])}}catch{setNotice("저장한 기록을 읽지 못했습니다.")}setReady(true)},[]);
- useEffect(()=>{if(ready)try{localStorage.setItem("security-notebook-v1",JSON.stringify({added:terms.filter(t=>t.id>53),stars,seen}))}catch{setNotice("이 브라우저에 기록을 저장하지 못했습니다.")}},[terms,stars,seen,ready]);
+ useEffect(()=>{try{const saved=JSON.parse(localStorage.getItem("security-notebook-v1")||"null");if(saved){const restored=restoreSaved(saved);setTerms(restored.terms);setStars(restored.stars);setSeen(restored.seen)}}catch{setNotice("저장한 기록을 읽지 못했습니다.")}setReady(true)},[]);
+ useEffect(()=>{if(ready)try{localStorage.setItem("security-notebook-v1",JSON.stringify({added:terms.filter(t=>!initialTerms.some(x=>x.id===t.id)),stars,seen}))}catch{setNotice("이 브라우저에 기록을 저장하지 못했습니다.")}},[terms,stars,seen,ready]);
  const stateRef=useRef({terms,stars});stateRef.current={terms,stars};
  useEffect(()=>{const context=(document as unknown as {modelContext?:{registerTool:(tool:unknown,options:{signal:AbortSignal})=>void|Promise<void>}}).modelContext;if(!context)return;const lifecycle=new AbortController();const register=(tool:unknown)=>{try{Promise.resolve(context.registerTool(tool,{signal:lifecycle.signal})).catch(()=>{})}catch{}};
  register({name:"read_security_glossary",description:"현재 용어와 별표 상태를 읽습니다. 원본과 보충 정의를 별도 필드로 반환합니다.",inputSchema:{type:"object",properties:{},additionalProperties:false},annotations:{readOnlyHint:true,untrustedContentHint:true},execute:()=>({terms:stateRef.current.terms,starredIds:stateRef.current.stars})});
