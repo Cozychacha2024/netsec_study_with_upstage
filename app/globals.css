@@ -140,4 +140,8 @@ h1,h2{word-break:keep-all;overflow-wrap:anywhere}.source-link{display:inline-fle
 /* Align the glossary list card with the main term card on wider screens. */
 @media(min-width:901px){.study-layout>.term-list{margin-top:46px}}
 
+.topbar{height:58px;font-size:13px}
+.topbar .slash{margin:0 10px}
+@media(max-width:650px){.topbar{height:48px}.topbar .slash{margin:0 6px}}
+
 .stats>button{text-align:left;justify-content:flex-start;transition:border-color .15s,box-shadow .15s}.stats>button:hover{border-color:#90a9e3;box-shadow:0 4px 15px #304a7910}.stats>button[aria-pressed="true"]{border-color:#7899eb;background:#f9fbff}.review-filters{display:flex;gap:8px;flex-wrap:wrap;margin:-8px 0 24px}.review-filters button{padding:10px 14px;min-height:44px;border-radius:10px;background:#fff;border:1px solid #e1e7f2;font-size:13px}.review-filters button[aria-pressed="true"]{background:#edf3ff;border-color:#94afe9;color:#345dc0}.review-filters b{font-size:12px}
