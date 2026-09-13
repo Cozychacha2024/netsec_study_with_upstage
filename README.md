@@ -27,3 +27,9 @@ Windows 환경에서 npm 셸 실행이 실패하면 node scripts/run-framework.m
 ## 검증
 
 TypeScript 검사와 실제 브라우저에서 별표 저장, 두 게임 채점, 용어 추가, 원본 전용 출력, 모바일 화면을 확인했습니다. PDF의 전체 원본 뜻을 텍스트 대조하고 모든 페이지를 렌더링하여 점검했습니다. 실제 Upstage 응답은 유효한 API 키가 없어 검증하지 않았습니다. WebMCP는 기능 감지 후 등록하며, 지원하는 브라우저 컨텍스트가 없어 네이티브 호출 검증은 수행하지 못했습니다.
+
+## Vercel 배포
+
+프로젝트 루트는 이 package.json이 있는 폴더로 설정합니다(저장소에 site 폴더가 있으면 Root Directory는 site). vercel.json은 Next.js와 build:vercel 빌드, .next 출력을 지정합니다. 기존 로컬 미리보기는 npm run dev를 사용합니다.
+
+Vercel Settings → Environment Variables에 UPSTAGE_API_KEY, UPSTAGE_MODEL(선택, 기본 solar-pro3), ADMIN_PASSWORD를 등록하고 재배포합니다. .env.local은 Git에서 제외되므로 자동 업로드되지 않습니다. 비밀값에 NEXT_PUBLIC_ 접두사를 붙이지 않습니다.

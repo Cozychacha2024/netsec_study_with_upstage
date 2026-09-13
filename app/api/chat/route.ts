@@ -1,4 +1,4 @@
-import {env} from "cloudflare:workers";
+import {env} from "@/lib/server-env";
 import terms from "../../terms.json";
 const runtime=env as unknown as {UPSTAGE_API_KEY?:string;UPSTAGE_MODEL?:string};
 const headers={"Cache-Control":"no-store"};
