@@ -30,6 +30,16 @@ TypeScript 검사와 실제 브라우저에서 별표 저장, 두 게임 채점,
 
 ## Vercel 배포
 
+### 보안냥이 대화 기록
+
+Supabase SQL Editor에서 만든 `boannyang_conversations`와 `boannyang_messages` 테이블을 사용합니다. 서버 환경 변수 `SUPABASE_URL`, `SUPABASE_SECRET_KEY`를 등록합니다. URL은 기존 `NEXT_PUBLIC_SUPABASE_URL`도 지원하며, 예전 서비스 역할 키는 `SUPABASE_SERVICE_ROLE_KEY`로 등록할 수 있습니다. Publishable key는 기존 서버 전용 테이블에 기록할 수 없습니다. Secret key는 브라우저로 전달하지 않습니다.
+
+`CHAT_SITE_ID`는 두 Vercel 프로젝트를 구분하는 선택 항목입니다. 미설정 시 요청 사이트의 호스트명을 사용합니다. 답변 생성이 성공하면 마지막 질문과 실제 생성한 답변만 저장하고, 이어지는 질문은 서버가 서명한 대화 토큰으로 같은 대화방에 묶습니다. 새로고침으로 화면 대화가 초기화되면 새 대화방이 시작됩니다. 방문자 로그인과 대화 조회 API는 없습니다. 관리자는 Supabase Table Editor에서 메시지를 `conversation_id`, `position` 순으로 확인합니다.
+
+저장은 응답 반환 전에 최대 8초 동안 시도하며, 실패하더라도 생성된 답변은 전달합니다. Vercel Logs에서 `[chat-log]`를 검색하세요. `missing_config`는 환경 변수 누락, `wrong_key_type`은 Publishable key 오등록, `http_401`/`http_403`은 키·권한 문제, `http_404`는 테이블·API 경로 문제입니다. 원문 대화나 키는 서버 로그에 출력하지 않습니다. Upstage 호출 자체가 실패한 질문은 저장하지 않습니다.
+
+환경 변수와 코드 변경 후 반드시 재배포해야 합니다. 이전 대화는 소급 저장되지 않습니다.
+
 프로젝트 루트는 이 package.json이 있는 폴더로 설정합니다(저장소에 site 폴더가 있으면 Root Directory는 site). vercel.json은 Next.js와 build:vercel 빌드, .next 출력을 지정합니다. 기존 로컬 미리보기는 npm run dev를 사용합니다.
 
 Vercel Settings → Environment Variables에 UPSTAGE_API_KEY, UPSTAGE_MODEL(선택, 기본 solar-pro3), ADMIN_PASSWORD를 등록하고 재배포합니다. .env.local은 Git에서 제외되므로 자동 업로드되지 않습니다. 비밀값에 NEXT_PUBLIC_ 접두사를 붙이지 않습니다.
