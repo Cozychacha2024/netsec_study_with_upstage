@@ -27,3 +27,94 @@ h1,h2{word-break:keep-all;overflow-wrap:anywhere}.source-link{display:inline-fle
 /* Book-like typography for assignment definitions. */
 @font-face{font-family:"Nanum Myeongjo";src:url("/fonts/NanumMyeongjo-Regular.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap}
 .term-card .definition p{font-family:"Nanum Myeongjo","Batang",serif;font-weight:400;font-size:16px;line-height:1.95;letter-spacing:0;word-break:keep-all;overflow-wrap:anywhere}
+
+/* Quiet, readable quiz notebook. */
+.game-panel{max-width:820px;border-radius:22px;box-shadow:0 10px 36px #243c7008}
+.game-panel .mode-tabs{padding:7px;gap:6px;background:#f8f9fc}
+.game-panel .mode-tabs button{font-size:14px;padding:12px;border-radius:12px}
+.game-panel .mode-tabs .selected{background:white;color:#345bc3;box-shadow:0 2px 8px #243c7010}
+.question{padding:28px 30px 30px}
+.question .section-heading{margin-bottom:12px;align-items:center}
+.question .section-heading>span{font-size:13px;font-weight:600;letter-spacing:.6px;color:#526582}
+.question .section-heading>b{font-size:12px;font-weight:500;color:#536a8f;background:#f0f4fb;padding:5px 11px;border-radius:20px}
+.question .track{height:4px;margin:0 0 24px;background:#edf0f6}
+.quiz-definition{background:#faf9f6;border:1px solid #eeeae2;border-radius:16px;padding:23px 25px;margin-bottom:22px}
+.quiz-definition .definition-label{font-size:12px;font-weight:500;letter-spacing:0;color:#817765}
+.question .quiz-definition h2{font-family:"Nanum Myeongjo","Batang",serif;font-size:18px;font-weight:400;line-height:1.95;letter-spacing:0;white-space:pre-line;word-break:keep-all;overflow-wrap:anywhere;margin:12px 0 0;color:#26344a}
+.question .choices{grid-template-columns:1fr;gap:10px}
+.question .choices button{min-height:62px;padding:14px 17px;gap:14px;border-radius:12px;background:white;transition:background .15s,border-color .15s;font-size:15px;line-height:1.6}
+.question .choices button:not(:disabled):hover{background:#f5f8ff;border-color:#97afe9}
+.question .choices .choice-number{display:grid;place-items:center;width:28px;height:28px;border:0;border-radius:8px;background:#f0f3f9;color:#71809a;font-size:12px}
+.question .choices .choice-text{border:0;border-radius:0;width:auto;flex:1;flex-shrink:1;color:inherit;text-align:left;font-size:15px;word-break:keep-all;overflow-wrap:anywhere}
+.choice-status{font-size:11px;flex-shrink:0;font-weight:600}
+.question .choices button:disabled{opacity:.65}
+.question .choices button.correct{background:#eff8f4;border-color:#80bba2;color:#246e54;opacity:1}
+.question .choices button.wrong{background:#fff5f1;border-color:#ddb2a2;color:#925540;opacity:1}
+.question .feedback{padding:18px 20px;font-size:14px;line-height:1.7;margin-top:20px}
+.question .feedback>div{flex-wrap:wrap}
+.question .answer-input input{font-size:16px;min-height:48px}
+@media(max-width:640px){
+ .game-panel{border-radius:17px}
+ .question{padding:20px 16px}
+ .quiz-definition{padding:19px 18px;margin-bottom:18px;border-radius:13px}
+ .question .quiz-definition h2{font-size:16px;line-height:1.95}
+ .question .choices button{padding:13px;gap:11px;min-height:60px}
+ .question .choices .choice-text{font-size:14px}
+ .question .feedback{padding:16px}
+}
+
+/* Formatted AI responses and a dimensional waiting animation. */
+.chat-markdown{background:#f2f5fc;padding:16px 20px;border-radius:12px;margin-top:6px;font-size:15px;line-height:1.85;overflow-wrap:anywhere;overflow-x:auto}
+.message .chat-markdown p{white-space:normal;padding:0;border-radius:0;background:none;font-size:inherit;margin:0 0 12px}
+.chat-markdown>:last-child{margin-bottom:0!important}
+.chat-markdown strong{font-weight:750;color:#243c65}
+.chat-markdown h1,.chat-markdown h2,.chat-markdown h3,.chat-markdown h4{font-size:17px;line-height:1.6;letter-spacing:0;margin:18px 0 8px}
+.chat-markdown>:first-child{margin-top:0}
+.chat-markdown ul,.chat-markdown ol{padding-left:23px;margin:8px 0 14px}
+.chat-markdown li{margin:5px 0}
+.chat-markdown li p{margin-bottom:4px!important}
+.chat-markdown a{color:#315cc8;text-decoration:underline;text-underline-offset:3px}
+.chat-markdown code{font-size:.9em;background:#e5ebf6;border-radius:4px;padding:2px 5px}
+.chat-markdown pre{background:#e5ebf6;border-radius:8px;padding:12px;overflow:auto;white-space:pre}
+.chat-markdown pre code{padding:0;background:none}
+.chat-markdown blockquote{margin:12px 0;padding-left:14px;border-left:3px solid #a5b7dc;color:#5b6d88}
+.chat-markdown table{border-collapse:collapse;font-size:14px;margin:12px 0;min-width:100%}
+.chat-markdown th,.chat-markdown td{border:1px solid #d8e1ef;padding:8px 10px;text-align:left}
+.chat-markdown th{background:#e6edf9}
+.thinking-3d{display:flex;align-items:center;gap:14px;width:fit-content;padding:12px 22px 12px 12px;margin:12px 0 20px;border:1px solid #fff;border-radius:22px;background:linear-gradient(145deg,#fff,#edf2fd);box-shadow:6px 6px 16px #233f7410,inset 2px 2px 3px #fff,inset -2px -2px 5px #dce5f560}
+.thinking-cat{position:relative;width:60px;height:68px;flex-shrink:0;perspective:250px}
+.thinking-cat img{position:relative;z-index:1;object-fit:contain;animation:cat-think 2.5s ease-in-out infinite;filter:drop-shadow(0 3px 2px #40527a18)}
+.cat-shadow{position:absolute;bottom:2px;left:14px;width:34px;height:7px;border-radius:50%;background:#bac8e2;filter:blur(3px);animation:cat-shadow 2.5s ease-in-out infinite}
+.thinking-label{font-size:13px;color:#536b92}
+.thinking-orbs{display:flex;gap:7px;margin-top:9px;height:14px;align-items:center}
+.thinking-orbs i{width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#dbe6ff,#7199f5 55%,#3d60b7);box-shadow:0 3px 4px #4064ad30,inset 0 1px 2px #fff9;animation:orb-think 1.4s ease-in-out infinite}
+.thinking-orbs i:nth-child(2){animation-delay:.18s}.thinking-orbs i:nth-child(3){animation-delay:.36s}
+@keyframes cat-think{0%,100%{transform:translateY(1px) rotate(-3deg)}50%{transform:translateY(-5px) rotate(3deg)}}
+@keyframes cat-shadow{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(.8);opacity:.35}}
+@keyframes orb-think{0%,70%,100%{transform:translateY(0)}35%{transform:translateY(-5px)}}
+@media(prefers-reduced-motion:reduce){.thinking-cat img,.cat-shadow,.thinking-orbs i{animation:none}}
+@media(max-width:640px){.chat-markdown{padding:14px 16px;font-size:14px}.thinking-3d{gap:9px;padding-right:15px}.thinking-label{font-size:12px}}
+
+/* Compact mobile navigation and clear definition typography. */
+.mobile-cat-shortcut,.mobile-basics-link{display:none}
+.term-card .definition>.definition-label{display:inline-block;font-size:14px;font-weight:650;color:#4064ac;background:#edf2ff;border-radius:6px;padding:3px 9px;letter-spacing:0}
+.term-card .definition p,.question .quiz-definition h2{font-family:inherit;font-size:15px;font-weight:400;line-height:1.85;letter-spacing:0}
+.chat-footnote{line-height:1.8}
+@media(max-width:650px){
+ .sidebar{position:relative;padding:18px 12px 0}
+ .brand{width:fit-content;font-size:20px;gap:8px}
+ .brand small{font-size:8px;letter-spacing:.5px}
+ .mobile-cat-shortcut{position:absolute;right:12px;top:14px;display:flex;gap:3px;padding:0;color:#d9e5ff;text-align:left;font-size:10px;line-height:1.45}
+ .mobile-cat-shortcut img{object-fit:contain;filter:drop-shadow(0 3px 4px #0002)}
+ .sidebar .side-label{display:flex;align-items:center;justify-content:space-between;margin:18px 0 10px;padding:8px 9px;gap:5px}
+ .sidebar .side-label h2{font-size:16px;white-space:nowrap}
+ .mobile-basics-link{display:flex;font-size:10px;color:#bacbe8;gap:1px;padding:3px 0;white-space:nowrap}
+ .sidebar nav{display:flex;gap:3px;margin-top:10px;padding-bottom:12px;overflow:visible}
+ .sidebar .nav-item{flex:1 1 auto;justify-content:center;font-size:clamp(9px,2.65vw,13px);padding:10px 3px;gap:3px;white-space:nowrap;border-radius:9px;min-height:42px}
+ .sidebar .nav-item svg{width:13px;height:13px;flex-shrink:0}
+ .sidebar .nav-item[data-tab="basics"]{display:none}
+ .topbar{padding:0 13px;gap:8px}
+ .topbar>span{font-size:10px;min-width:0}
+ .topbar .export-button{white-space:nowrap;flex-shrink:0;font-size:11px}
+ .term-card .definition p,.question .quiz-definition h2{font-size:14px;line-height:1.85}
+}
