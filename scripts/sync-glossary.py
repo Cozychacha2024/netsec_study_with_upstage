@@ -41,6 +41,8 @@ if __name__ == '__main__':
     sys.stdout.reconfigure(encoding='utf-8')
     old = json.loads((ROOT / 'app/terms.json').read_text(encoding='utf-8'))
     source = read_source()
+    assert [t['sourceNumber'] for t in source] == list(range(1, len(source)+1)), 'Source numbering must be consecutive starting at 1'
+    assert [t['id'] for t in old] == list(range(1, len(old)+1)), 'Review the saved-record migration before changing IDs'
     # Internal IDs preserve existing study records when the source order is stable.
     assert len(source) == len(old), 'Entry count changed; review ID mapping before import'
     assert all(a['term'] == b['term'] for a,b in zip(source,old)), 'Names or order changed; review ID mapping'
