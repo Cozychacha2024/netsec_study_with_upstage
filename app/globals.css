@@ -141,6 +141,28 @@ h1,h2{word-break:keep-all;overflow-wrap:anywhere}.source-link{display:inline-fle
 @media(min-width:901px){.study-layout>.term-list{margin-top:46px}}
 
 .topbar{height:58px;font-size:13px}
+.mobile-copy-break{display:none}
+@media(max-width:650px){
+ .mobile-copy-break{display:block}
+ .game-panel .mode-tabs button{padding:12px 6px;font-size:clamp(12px,3.4vw,14px);white-space:nowrap}
+ .desktop-copy-space{display:none}
+ .heading h1{line-height:1.45}
+ .heading p,.quick-game p,.chat-welcome p,.game-start p{word-break:keep-all;text-wrap:pretty}
+ .eyebrow{line-height:1.8;letter-spacing:1.4px}
+ .term-card h2,.basics-grid h2,.empty h3{word-break:keep-all;text-wrap:balance}
+ .quick-game{gap:10px}
+ .quick-game>div{min-width:0}
+ .quick-game strong{word-break:keep-all}
+ .quick-game>svg{width:20px;flex-shrink:0}
+ .quick-game button{width:34px;height:34px}
+ .chat-welcome button{text-align:left;word-break:keep-all;text-wrap:pretty}
+ .chat-welcome button svg{flex-shrink:0}
+ .stats>button>span:last-child{white-space:nowrap}
+ .study-layout>section>.section-heading{flex-wrap:wrap;gap:5px 12px}
+ .study-layout>section>.section-heading h2{word-break:keep-all}
+ .study-layout>section>.section-heading>span{margin-left:auto;white-space:nowrap}
+ .total-terms{display:inline-block;white-space:nowrap}
+}
 .topbar .slash{margin:0 10px}
 @media(max-width:650px){.topbar{height:48px}.topbar .slash{margin:0 6px}}
 
