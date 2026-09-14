@@ -142,6 +142,16 @@ h1,h2{word-break:keep-all;overflow-wrap:anywhere}.source-link{display:inline-fle
 
 .topbar{height:58px;font-size:13px}
 .mobile-copy-break{display:none}
+.pwa-install{display:flex;align-items:center;gap:14px;margin-top:28px;padding:18px 20px;border:1px solid #dce5f7;border-radius:16px;background:#edf3ff;color:#385a9d;font-size:14px}
+.pwa-install>svg,.pwa-status>svg{flex-shrink:0}
+.pwa-install strong{font-weight:650}.pwa-install p{margin:5px 0 0;color:#647797;font-size:13px;line-height:1.7;word-break:keep-all}
+.pwa-install button{margin-left:auto;flex-shrink:0;min-height:44px;padding:10px 14px;border-radius:10px;background:#3864eb;color:white}
+.pwa-install summary{margin-top:10px;cursor:pointer;font-size:13px;text-decoration:underline;text-underline-offset:4px;line-height:1.8}
+.pwa-status{position:fixed;bottom:max(16px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);z-index:18;display:flex;align-items:center;gap:12px;width:max-content;max-width:calc(100% - 28px);padding:14px 18px;border:1px solid #dce5f7;border-radius:16px;background:#fff;box-shadow:0 8px 30px #15294b24;color:#34568e;font-size:13px}
+.pwa-status p{margin:0;line-height:1.7;word-break:keep-all}.pwa-status small{display:block;font-size:12px;color:#647797}.pwa-status button{flex-shrink:0;min-height:44px;padding:8px 12px;border-radius:9px;background:#edf3ff;font-size:13px}
+.content:has(.pwa-status){padding-bottom:calc(140px + env(safe-area-inset-bottom))}
+@media(max-width:650px){.pwa-install{flex-wrap:wrap;padding:16px;gap:10px}.pwa-install button{margin-left:34px}.pwa-status{flex-wrap:wrap;gap:8px;padding:12px 14px}.pwa-status p{flex:1}.pwa-status button{margin-left:auto}.sidebar{padding-top:max(18px,env(safe-area-inset-top))!important;padding-left:max(12px,env(safe-area-inset-left))!important;padding-right:max(12px,env(safe-area-inset-right))!important}.content{padding-bottom:max(24px,env(safe-area-inset-bottom))}}
+@media print{.pwa-install,.pwa-status{display:none!important}}
 @media(max-width:650px){
  .mobile-copy-break{display:block}
  .game-panel .mode-tabs button{padding:12px 6px;font-size:clamp(12px,3.4vw,14px);white-space:nowrap}

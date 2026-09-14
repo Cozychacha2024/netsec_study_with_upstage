@@ -50,3 +50,6 @@ next-env.d.ts
 # Local API secrets
 .env.local
 env.local
+
+# Generated from the current Next.js production build
+/public/pwa-precache.js

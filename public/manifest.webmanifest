@@ -1,0 +1,17 @@
+{
+  "id": "/",
+  "name": "보안노트 · My Network Security Note",
+  "short_name": "보안노트",
+  "description": "한 단어씩 복습하는 나만의 네트워크 보안 학습 공간",
+  "lang": "ko",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f5f7fd",
+  "theme_color": "#101d37",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

@@ -2,6 +2,17 @@
 
 네트워크 보안 용어를 복습하는 모바일 대응 학습 사이트입니다.
 
+## PWA 설치와 오프라인 학습
+
+- Vercel에 재배포하면 HTTPS 주소에서 PWA로 설치할 수 있습니다. 안드로이드·데스크톱의 지원 브라우저에서는 페이지 하단의 ‘앱 설치’를, 아이폰·아이패드에서는 공유 메뉴 → ‘홈 화면에 추가’를 사용합니다. 설치된 앱 안에서는 설치 안내를 숨깁니다.
+- 첫 온라인 방문에서 오프라인 자료 저장이 완료되면 용어 학습, 별표, 게임, 기초 사전, PDF 출력 화면을 오프라인에서도 열 수 있습니다. 보안냥이와 관리자 인증은 인터넷이 필요합니다. 대화 및 API 응답은 서비스 워커에 저장하지 않습니다.
+- 별표·복습·추가 용어는 기존 브라우저 저장소를 사용합니다. 기기·브라우저 간 동기화는 없으며, 설치 방식에 따라 앱과 브라우저의 저장 공간이 분리될 수 있습니다. 브라우저 데이터 삭제나 저장 공간 정리로 오프라인 자료가 없어지면 다시 온라인으로 방문해야 합니다.
+- 업데이트가 준비되면 ‘새로고침’ 버튼이 나타납니다. 누르기 전까지 진행 중인 게임과 대화 화면을 강제로 새로고침하지 않습니다. 저장된 별표와 복습 기록은 새 버전에서도 유지합니다.
+- `npm run build:vercel`은 Next.js 빌드 후 `scripts/build-pwa.mjs`로 해당 빌드의 오프라인 목록을 생성합니다. 생성된 `public/pwa-precache.js`는 Git에서 제외합니다. Vercel의 빌드 명령을 `next build`만으로 바꾸면 이 단계가 누락됩니다.
+- 개발 서버에서는 서비스 워커를 등록하지 않습니다. PWA를 로컬에서 검증하려면 `npm run build:vercel` 후 `node node_modules/next/dist/bin/next start -p 5174`로 프로덕션 서버를 실행하세요. localhost는 HTTPS 없이도 테스트할 수 있습니다.
+
+구현 기준: [Next.js PWA 가이드](https://nextjs.org/docs/app/guides/progressive-web-apps), [MDN 설치 요건](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Guides/Making_PWAs_installable).
+
 ## 사용
 
 - 용어 복습: 원본과 보충 정의를 구분하고 뜻 가리기, 복습 완료를 지원합니다.
