@@ -1,7 +1,7 @@
 import initial from "./terms.json";
 type Term=typeof initial[number];
 export const NUMBERING_VERSION=2;
-export function restoreSaved(saved:{numberingVersion?:number;added?:Term[];stars?:number[];seen?:number[]}|null){
+export function restoreSaved(saved:{numberingVersion?:number;added?:Term[];stars?:number[];seen?:number[];bookmarkId?:number}|null){
  const ids=new Map<number,number>();let next=100000;
  // Version 1 skipped 98. Move progress with its term, not with its old label.
  if((saved?.numberingVersion??1)<NUMBERING_VERSION){
@@ -15,5 +15,6 @@ export function restoreSaved(saved:{numberingVersion?:number;added?:Term[];stars
  });
  const terms=[...initial,...added];const valid=new Set(terms.map(t=>t.id));
  const map=(items:number[]=[])=>[...new Set(items.map(id=>ids.get(id)??id).filter(id=>valid.has(id)))];
- return {numberingVersion:NUMBERING_VERSION,terms,stars:map(saved?.stars),seen:map(saved?.seen)};
+ const bookmarkId=typeof saved?.bookmarkId==="number"?map([saved.bookmarkId])[0]:undefined;
+ return {numberingVersion:NUMBERING_VERSION,terms,stars:map(saved?.stars),seen:map(saved?.seen),bookmarkId:bookmarkId??terms[0]?.id};
 }
