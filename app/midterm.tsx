@@ -2,18 +2,21 @@
 import {useEffect,useState} from "react";
 import {BookOpen,Check,ChevronLeft,ChevronRight,ClipboardCheck,Eye,List,RotateCcw,Target} from "lucide-react";
 import PerfectCelebration from "./perfect-celebration";
+import MidtermPaper from "./midterm-paper";
 import {acceptsMidtermAnswer,makeMidtermTest,midtermTerms,restoreMidterm,MIDTERM_KEY,type MidtermProgress,type MemoryStatus} from "./midterm-model";
 import "./midterm.css";
 
 type Scope="all"|"unlearned"|"review";
 type Answer={id:number;answer:string;correct:boolean};
-type Exam={mode:"write"|"choice";deck:ReturnType<typeof makeMidtermTest>;answers:Answer[]};
+type Exam={mode:"write"|"choice";layout:"single"|"paper";deck:ReturnType<typeof makeMidtermTest>;answers:Answer[]};
 export default function Midterm(){
  const [view,setView]=useState<"cards"|"test"|"list">("cards");
  const [progress,setProgress]=useState<MidtermProgress>({statuses:{},bookmarkId:1});
  const [loaded,setLoaded]=useState(false);const [storageMessage,setStorageMessage]=useState("");
  const [scope,setScope]=useState<Scope>("all");const [reverse,setReverse]=useState(false);const [revealed,setRevealed]=useState(false);
  const [testMode,setTestMode]=useState<"write"|"choice">("write");const [exam,setExam]=useState<Exam|null>(null);
+ const [testLayout,setTestLayout]=useState<"single"|"paper">("paper");
+ const [paperDrafts,setPaperDrafts]=useState<Record<number,string>>({});
  const [input,setInput]=useState("");const [choice,setChoice]=useState<number|null>(null);
  const [showFeedback,setShowFeedback]=useState(false);
  const [search,setSearch]=useState("");const [page,setPage]=useState(1);
@@ -42,7 +45,20 @@ export default function Midterm(){
   const next=ordered.find(t=>included(t.id,statuses));
   setProgress({statuses,bookmarkId:next?.id??current.id});setRevealed(false);
  }
- function startTest(){setExam({mode:testMode,deck:makeMidtermTest(),answers:[]});setInput("");setChoice(null);setShowFeedback(false);setView("test")}
+ function startTest(){setExam({mode:testMode,layout:testLayout,deck:makeMidtermTest(),answers:[]});setPaperDrafts({});setInput("");setChoice(null);setShowFeedback(false);setView("test")}
+ function gradePaper(id?:number){
+  setExam(previous=>{
+   if(!previous||previous.layout!=="paper")return previous;
+   const answers=previous.deck.flatMap(({term})=>{
+    const saved=previous.answers.find(a=>a.id===term.id);
+    if(saved)return [saved];
+    if(id!==undefined&&term.id!==id)return [];
+    const answer=(paperDrafts[term.id]||"").trim();
+    return [{id:term.id,answer,correct:acceptsMidtermAnswer(term,answer)}];
+   });
+   return {...previous,answers};
+  });
+ }
  function submit(skip=false){
   if(!exam||showFeedback||exam.answers.length>=exam.deck.length)return;
   if(!skip&&(exam.mode==="write"?!input.trim():choice===null))return;
@@ -85,10 +101,11 @@ export default function Midterm(){
    </article>:<div className="midterm-empty"><Check size={30}/><h2>{scope==="unlearned"?"모든 용어를 확인했어요!":"다시 볼 용어가 없어요."}</h2><p>전체 범위를 복습하거나 랜덤 테스트로 확인해 보세요.</p><button onClick={()=>setScope("all")}>전체 범위로 돌아가기</button></div>}
   </>}
   {view==="test"&&(!exam?<div className="midterm-test-start">
-   <span className="midterm-test-icon"><ClipboardCheck size={32}/></span><h2>중간고사 대비 테스트</h2><p>54개 중 중복 없이 무작위 10문제.<br/>한 문제씩 풀고 정답과 설명을 바로 확인해요.</p>
+   <span className="midterm-test-icon"><ClipboardCheck size={32}/></span><h2>중간고사 대비 테스트</h2><p>54개 중 중복 없이 무작위 10문제.<br/>{testLayout==="paper"?"시험지처럼 펼쳐 보고 원하는 순서로 풀어보세요.":"한 문제씩 풀고 정답과 설명을 바로 확인해요."}</p>
+   <div className="midterm-setup-option"><span>화면 구성</span><div className="midterm-mode" role="group" aria-label="테스트 화면 구성"><button aria-pressed={testLayout==="paper"} onClick={()=>setTestLayout("paper")}>시험지형</button><button aria-pressed={testLayout==="single"} onClick={()=>setTestLayout("single")}>한 문제씩</button></div></div>
    <div className="midterm-mode" role="group" aria-label="테스트 문제 방식"><button aria-pressed={testMode==="write"} onClick={()=>setTestMode("write")}>직접 입력</button><button aria-pressed={testMode==="choice"} onClick={()=>setTestMode("choice")}>객관식</button></div>
    <p className="midterm-help">{testMode==="write"?"설명을 읽고 키워드를 입력하세요. 띄어쓰기·영문 대소문자는 구분하지 않아요.":"설명을 읽고 네 가지 보기 중 정답을 고르세요."}</p><button className="midterm-primary" onClick={startTest}>랜덤 10문제 시작<ChevronRight size={17}/></button>
-  </div>:complete?<div className="midterm-results">
+  </div>:exam.layout==="paper"?<MidtermPaper mode={exam.mode} deck={exam.deck} answers={exam.answers} drafts={paperDrafts} onChange={(id,value)=>{if(!exam.answers.some(a=>a.id===id))setPaperDrafts(p=>({...p,[id]:value}))}} onGrade={gradePaper} onReview={reviewMistakes} onRestart={()=>setExam(null)}/>:complete?<div className="midterm-results">
    <div className="midterm-result-summary" role="status">{score===10?<PerfectCelebration/>:<ClipboardCheck size={38}/>}<h2>테스트 완료!</h2><div className="midterm-score">{score}<small> / 10</small></div><p>{score===10?"모든 문제를 정확히 맞혔어요. 축하해요!":`틀린 ${wrong.length}개 용어를 한 번 더 확인해 보세요.`}</p></div>
    <div className="midterm-result-actions">{wrong.length>0&&<button className="midterm-primary" onClick={reviewMistakes}>오답 암기 확인</button>}<button onClick={()=>{setExam(null);setInput("");setChoice(null)}}><RotateCcw size={16}/>새 테스트 준비</button></div>
    <h3>답안 확인</h3><ol className="midterm-answer-list">{exam.answers.map((a,i)=>{const term=exam.deck[i].term;return <li key={a.id} className={a.correct?"is-correct":"is-wrong"}><div><span className="midterm-answer-state">{a.correct?"정답":"오답"}</span><strong>{i+1}. {term.keyword}</strong></div><p className="midterm-user-answer">내 답: {a.answer||"모르겠어요"}</p><p>{term.description}</p></li>})}</ol>
